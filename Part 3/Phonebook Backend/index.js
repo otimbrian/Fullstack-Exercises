@@ -44,7 +44,7 @@ app.get('/api/persons/:id', (request, response) => {
     // const pers = persons.find(n => n.id === id)
     Person.findById(request.params.id).then(
         person => {
-            if(person === undefined){
+            if(person){
                 response.json(person)
             }else{
                 response.status(400).end()
