@@ -1,3 +1,4 @@
+
 require('dotenv').config()
 const express = require('express')
 const app = express()
@@ -8,13 +9,12 @@ const cors = require('cors')
 app.use(cors())
 const morgan = require('morgan')
 
-
-morgan.token('content', getcontent = (req) => {
+morgan.token('content', (req) => {
     return JSON.stringify(req.body)
 })
 
 
-app.use(morgan(`:method :url :status :res[content-length] - :response-time ms - :content `))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms - :content '))
 const Person = require('./models/person')
 
 
@@ -30,10 +30,10 @@ app.get('/api/persons', (request, response) => {
 app.get('/info', (request, response) => {
     const time = new Date()
     Person.find({}).then(
-      result => {
-          response.send(
-              `<div><p>Phonebook has infor for ${result.length} people</p><div>${time}</div></div>`
-          )
+        result => {
+            response.send(
+                `<div><p>Phonebook has infor for ${result.length} people</p><div>${time}</div></div>`
+            )
         }
     )
 })
@@ -58,20 +58,20 @@ app.delete('/api/persons/:id', (request, response, next) => {
     // persons = persons.filter(pers => pers.id !== id)
     console.log(request.params.id)
     Person.findByIdAndRemove(request.params.id).then(
-        result => {
+        () => {
             response.status(204).end()
         }
     ).catch(error => next(error))
 })
 
-const generateId = () => Math.floor((Math.random() * 10000) + 1)
+// const generateId = () => Math.floor((Math.random() * 10000) + 1)
 
 
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
-    if(body.number === "" && body.name === "" || body.number === "" || body.name === ""){
+    if(body.number === '' && body.name === '' || body.number === '' || body.name === ''){
         return response.status(400).json({
-            "Error" : "Name or contact is missing"
+            'Error' : 'Name or contact is missing'
         })
     }
     // Person.find({}).then(
@@ -108,7 +108,7 @@ app.put('/api/persons/:id', (request, response, next) => {
         number: body.number
     }
 
-    Person.findByIdAndUpdate(request.params.id, person, {runValidator: true}, {new : true}).then(
+    Person.findByIdAndUpdate(request.params.id, person, { new : true } ).then(
         updated => {
             response.json(updated.toJSON())
         }
@@ -121,24 +121,25 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
-  }
-  
+}
+
 app.use(unknownEndpoint)
 
 
 const errorHandler = (error, request, response, next) => {
     console.error(error.message)
-  
+
     if (error.name === 'CastError') {
         return response.status(400).send({ error: 'malformatted id' })
     }
     else if(error.name === 'ValidationError'){
-        return response.status(400).json({error: error.message})
-    } 
+        return response.status(400).json({ error: error.message })
+    }
     next(error)
-  }
+}
 app.use(errorHandler)
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`The server is running on port ${PORT}`)

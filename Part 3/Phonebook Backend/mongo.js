@@ -1,4 +1,5 @@
-mongoose = require('mongoose')
+/* eslint-disable no-undef */
+const mongoose = require('mongoose')
 
 
 console.log(process.argv)
@@ -7,6 +8,7 @@ if(process.argv.length < 3){
     process.exit()
 }
 
+// eslint-disable-next-line no-undef
 const password = process.argv[2]
 const url = `mongodb+srv://fullstack:${password}@cluster0.ue16q.mongodb.net/Phonebook-app?retryWrites=true&w=majority`
 
@@ -24,9 +26,9 @@ if (process.argv.length > 3){
         name: process.argv[3],
         number: process.argv[4],
     })
-    
-    person.save().then(result => {
-        console.log("Added", person.name, person.number, "to phonebook")
+
+    person.save().then(() => {
+        console.log('Added', person.name, person.number, 'to phonebook')
         mongoose.connection.close()
     })
 }
@@ -38,9 +40,9 @@ if(process.argv.length === 3){
             result.forEach(person => {
                 console.log(person.name, person.number)
             }
-                )
-                mongoose.connection.close()
-            }  
+            )
+            mongoose.connection.close()
+        }
     )
 }
-    
+
