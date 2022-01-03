@@ -111,6 +111,18 @@ const App = () => {
                 setNewNumber('')
                 
             }
+        ).catch(
+            error => {
+                console.log(error.response.data)
+                setMessage(`${JSON.stringify(error.response.data)}`)
+                setStatus('error')
+                setTimeout(() => {
+                    setMessage(null)
+                    setStatus(null)
+                }, 5000)
+                setNewName('')
+                setNewNumber('')
+            }
         )
         
     }
