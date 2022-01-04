@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Nas The GOAT",
-    "author": "DJ Danny The Don",
-    "url": "http://localhost/getting-nas",
-    "likes":23
+    "title": "React.JS for web",
+    "author": "Denny Jolly",
+    "url": "http://localhost/web-frame-work",
+    "likes":15
 }
