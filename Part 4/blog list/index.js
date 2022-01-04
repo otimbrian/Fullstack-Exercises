@@ -1,24 +1,10 @@
 const http = require('http')
-const express = require('express')
-const logger = require('./utils/logger')
+const app = require('./app')
 const config = require('./utils/config')
-const midddleware = require('./utils/middleware')
-const app = express()
-const cors = require('cors')
-const mongoose = require('mongoose')
-const blogsRouter = require('./controllers/blogs')
+const logger = require('./utils/logger')
 
-mongoose.connect(config.mongoUrl)
+const server = http.createServer(app)
 
-app.use(cors())
-app.use(express.json())
-app.use(midddleware.requestLogger)
-
-app.use(blogsRouter)
-
-app.use(midddleware.unknownEndPoint)
-app.use(midddleware.errorHandler)
-
-app.listen(config.PORT, () => {
+server.listen(config.PORT, () => {
     logger.infor(`Server running on port ${config.PORT}`)
 })

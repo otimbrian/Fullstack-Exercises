@@ -1,0 +1,30 @@
+const config = require('./utils/config')
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const blogsRouter = require('./controllers/blogs')
+const midddleware = require('./utils/middleware')
+const logger = require('./utils/logger')
+const mongoose = require('mongoose')
+
+logger.infor('Connecting to : ', config.mongoUrl)
+mongoose.connect(config.mongoUrl).then(
+    () => {
+        logger.infor('.......Connected to the database......')
+    }
+).catch(
+    error => {
+        logger.error('Error Connecting to DB: ', error.message)
+    }
+)
+
+app.use(cors())
+app.use(express.json())
+app.use(midddleware.requestLogger)
+
+app.use(blogsRouter)
+
+app.use(midddleware.unknownEndPoint)
+app.use(midddleware.errorHandler)
+
+module.exports = app
