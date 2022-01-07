@@ -15,6 +15,7 @@ const totalLike = (blogs) => {
 }
 
 
+
 const favouriteBlog = (blogs) => {
     var value = 0
     blogs.forEach(

@@ -39,7 +39,7 @@ const multipleBlogs = [
         'id': '61d469a2a667a36b77c0ff94'
     }
 ]
-const multipleBlogsWithMoreThanOneFavourite = [[
+const multipleBlogsWithMoreThanOneFavourite = [
     {
         'title': 'Welcome to Nature',
         'author': 'Otim Brian',
@@ -68,7 +68,7 @@ const multipleBlogsWithMoreThanOneFavourite = [[
         'likes': 15,
         'id': '61d469a2a667a36b77c0ff94'
     }
-]]
+]
 describe('Dummy Test', () => {
     test('[] should be 1', () => {
         expect(listHelper.dummy([])).toBe(1)
