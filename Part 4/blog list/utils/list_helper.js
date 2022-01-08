@@ -34,4 +34,23 @@ const favouriteBlog = (blogs) => {
     console.log(result)
     return result
 }
-module.exports = { dummy, totalLike, favouriteBlog }
+
+const mostBlogs = (blogs) => {
+    // returns the author who has the largest amount of blogs
+    // {
+    //     author: "Robert C. Martin",
+    //     blogs: 3
+    //   }
+    return blogs
+}
+
+const mostLikes = (blogs) => {
+    // returns the author, whose blog posts have the largest amount of likes
+    // {
+    //     author: "Edsger W. Dijkstra",
+    //     likes: 17
+    //   }
+    return blogs
+}
+
+module.exports = { dummy, totalLike, favouriteBlog, mostBlogs, mostLikes }
