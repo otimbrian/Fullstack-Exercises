@@ -81,7 +81,7 @@ describe('Total likes of ', () => {
         expect(listHelper.totalLike([])).toBe(0)
     })
 
-    test('A single blog should be equal to likes of that list', () => {
+    test('A single blog should be equal to likes of that blog', () => {
         expect(listHelper.totalLike(singleBlog)).toBe(20)
     })
     test('Multibe blogs should be calculated right', () => {
