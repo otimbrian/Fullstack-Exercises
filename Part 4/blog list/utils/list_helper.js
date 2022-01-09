@@ -5,13 +5,11 @@ const dummy = (blogs) => {
 }
 
 const totalLike = (blogs) => {
-    var sum = 0
-    blogs.forEach(blog => {
-        sum += blog.likes
-    })
     return blogs.length === 0
         ? 0
-        : sum
+        : blogs.reduce((total, blog) => {
+            return total + blog.likes
+        }, 0)
 }
 
 
