@@ -132,3 +132,9 @@ describe('Favourite Blogs of', () => {
         expect(listHelper.favouriteBlog(multipleBlogsWithMoreThanOneFavourite)).toEqual(resultForMultipleBlogWwithMorethanOneFavourites)
     })
 })
+
+describe('Most Blogs',  () => {
+    test('trial', () => {
+        expect(listHelper.mostBlogs(multipleBlogs)).toEqual(resultForMultipleBlog)
+    })
+})
