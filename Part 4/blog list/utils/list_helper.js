@@ -65,8 +65,12 @@ const mostBlogs = (blogs) => {
     console.log('Author names: ', names)
     console.log('Author with most blogs : ',requiredAuthor)
 
+    const author = requiredAuthor[0]
+        ? requiredAuthor[0]
+        : 'No author'
+
     const mostPub = {
-        'author' : requiredAuthor[0],
+        'author' : author,
         'Blogs': value
     }
     console.log(mostPub)
@@ -114,7 +118,6 @@ const mostLikes = (blogs) => {
         'author' : author,
         'likes' : likeValue
     }
-
     console.log(requiredResult)
     return requiredResult
 }

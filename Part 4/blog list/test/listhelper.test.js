@@ -85,7 +85,7 @@ describe('Total likes of ', () => {
         expect(listHelper.totalLike(singleBlog)).toBe(20)
     })
     test('Multibe blogs should be calculated right', () => {
-        expect(listHelper.totalLike(multipleBlogs)).toBe(108)
+        expect(listHelper.totalLike(multipleBlogs)).toBe(128)
     })
 
 })
@@ -141,7 +141,7 @@ describe('Top Blogger',  () => {
         expect(listHelper.mostBlogs(multipleBlogs)).toEqual(mostPubAuthor)
     })
     test('empty list', () => {
-        expect(listHelper.mostBlogs([])).toEqual({ author: undefined, Blogs: 0 })
+        expect(listHelper.mostBlogs([])).toEqual({ author: 'No author', Blogs: 0 })
     })
     test('Many top bloggers', () => {
         expect(listHelper.mostBlogs(multipleBlogsWithMoreThanOneFavourite)).toEqual(
