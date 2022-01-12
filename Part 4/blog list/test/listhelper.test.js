@@ -159,4 +159,11 @@ describe('Most liked author', () => {
         })
     })
 
+    test('[] should return correct', () => {
+        expect(listHelper.mostLikes([])).toEqual({
+            'author' : 'No author',
+            'likes' : 0
+        })
+    })
+
 })

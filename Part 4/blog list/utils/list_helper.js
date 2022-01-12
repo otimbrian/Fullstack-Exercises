@@ -104,11 +104,14 @@ const mostLikes = (blogs) => {
             return mostLikedAuthor[name] === likeValue
         }
     )
+    const author = requiredName[0]
+        ? requiredName[0]
+        : 'No author'
 
-    console.log('Most liked author : ', requiredName)
+    console.log('Most liked author : ', author)
 
     const requiredResult = {
-        'author' : requiredName[0],
+        'author' : author,
         'likes' : likeValue
     }
 
