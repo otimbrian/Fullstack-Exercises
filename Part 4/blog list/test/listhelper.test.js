@@ -150,3 +150,13 @@ describe('Top Blogger',  () => {
         })
     })
 })
+
+describe('Most liked author', () => {
+    test('Multiple blogs should be most liked blog', () => {
+        expect(listHelper.mostLikes(multipleBlogsWithMoreThanOneFavourite)).toEqual({
+            'author': 'Edwin Huble',
+            'likes' : 50
+        })
+    })
+
+})

@@ -59,10 +59,12 @@ const mostBlogs = (blogs) => {
             return authorList[name] === value
         }
     )
+
     console.log('Most number of Blog: ' , value)
     console.log('author List: ' , authorList)
     console.log('Author names: ', names)
-    console.log('required name : ',requiredAuthor)
+    console.log('Author with most blogs : ',requiredAuthor)
+
     const mostPub = {
         'author' : requiredAuthor[0],
         'Blogs': value
@@ -72,12 +74,46 @@ const mostBlogs = (blogs) => {
 }
 
 const mostLikes = (blogs) => {
+    var likeValue = 0
     // returns the author, whose blog posts have the largest amount of likes
     // {
     //     author: "Edsger W. Dijkstra",
     //     likes: 17
     //   }
-    return blogs
+    const names = blogs.map(
+        blog => {
+            return blog.author
+        }
+    )
+    const mostLikedAuthor = blogs.reduce((result, blog) => {
+        return result[blog['author']]
+            ? result[blog['author']] += blog['likes']
+            : result[blog['author']] = blog['likes'], result
+    }, [])
+    console.log('List of authors and likes: ', mostLikedAuthor)
+
+    names.forEach(name => {
+        if(mostLikedAuthor[name] > likeValue){
+            likeValue = mostLikedAuthor[name]
+        }
+    })
+    console.log('Author Names: ', names)
+
+    const requiredName = names.filter(
+        name => {
+            return mostLikedAuthor[name] === likeValue
+        }
+    )
+
+    console.log('Most liked author : ', requiredName)
+
+    const requiredResult = {
+        'author' : requiredName[0],
+        'likes' : likeValue
+    }
+
+    console.log(requiredResult)
+    return requiredResult
 }
 
 module.exports = { dummy, totalLike, favouriteBlog, mostBlogs, mostLikes }
