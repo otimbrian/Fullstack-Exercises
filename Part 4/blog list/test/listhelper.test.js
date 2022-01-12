@@ -28,7 +28,7 @@ const multipleBlogs = [
         'title': 'Nas The GOAT',
         'author': 'Otim Brian',
         'url': 'http://localhost/getting-nas',
-        'likes': 23,
+        'likes': 43,
         'id': '61d44636dbf4a54bc01e034e'
     },
     {
@@ -144,26 +144,41 @@ describe('Top Blogger',  () => {
         expect(listHelper.mostBlogs([])).toEqual({ author: undefined, Blogs: 0 })
     })
     test('Many top bloggers', () => {
-        expect(listHelper.mostBlogs(multipleBlogsWithMoreThanOneFavourite)).toEqual({
-            'author': 'Otim Brian',
-            'Blogs' : 1
-        })
+        expect(listHelper.mostBlogs(multipleBlogsWithMoreThanOneFavourite)).toEqual(
+            {
+                'author': 'Otim Brian',
+                'Blogs' : 1
+            }
+        )
     })
 })
 
 describe('Most liked author', () => {
-    test('Multiple blogs should be most liked blog', () => {
-        expect(listHelper.mostLikes(multipleBlogsWithMoreThanOneFavourite)).toEqual({
-            'author': 'Edwin Huble',
-            'likes' : 50
-        })
+    test('Multiple blogs with more than one most liked should return the first', () => {
+        expect(listHelper.mostLikes(multipleBlogsWithMoreThanOneFavourite)).toEqual(
+            {
+                'author': 'Edwin Huble',
+                'likes' : 50
+            }
+        )
     })
 
     test('[] should return correct', () => {
-        expect(listHelper.mostLikes([])).toEqual({
-            'author' : 'No author',
-            'likes' : 0
-        })
+        expect(listHelper.mostLikes([])).toEqual(
+            {
+                'author' : 'No author',
+                'likes' : 0
+            }
+        )
+    })
+
+    test('Multiple blogs should be most liked blog', () => {
+        expect(listHelper.mostLikes(multipleBlogs)).toEqual(
+            {
+                'author': 'Otim Brian',
+                'likes' : 63
+            }
+        )
     })
 
 })
