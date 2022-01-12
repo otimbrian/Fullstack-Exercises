@@ -63,9 +63,9 @@ const mostBlogs = (blogs) => {
     console.log('author List: ' , authorList)
     console.log('Author names: ', names)
     console.log('required name : ',requiredAuthor)
-    const mostPub = { 
-        'author' : requiredAuthor[0], 
-        'Blogs': value 
+    const mostPub = {
+        'author' : requiredAuthor[0],
+        'Blogs': value
     }
     console.log(mostPub)
     return mostPub
