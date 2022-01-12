@@ -1,4 +1,4 @@
-const lodash = require('lodash')
+// const lodash = require('lodash')
 // eslint-disable-next-line no-unused-vars
 const dummy = (blogs) => {
     return 1
@@ -34,17 +34,41 @@ const favouriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
+    var value = 0
     // returns the author who has the largest amount of blogs
     // {
     //     author: "Robert C. Martin",
     //     blogs: 3
     //   }
-    const authors = blogs.map(blog => {
+    const names = blogs.map(blog => {
         return blog.author
     })
-    const group = lodash.groupBy(blogs, blogs)
-    console.log(group)
-    return group
+    const authorList = blogs.reduce((name, blog) => {
+        return name[blog['author']]
+            ? ++name[blog['author']]
+            : name[blog['author']] = 1, name
+    }, [])
+    names.forEach( name => {
+        if(authorList[name] > value){
+            value = authorList[name]
+        }
+    }
+    )
+    const requiredAuthor = names.filter(
+        name => {
+            return authorList[name] === value
+        }
+    )
+    console.log('Most number of Blog: ' , value)
+    console.log('author List: ' , authorList)
+    console.log('Author names: ', names)
+    console.log('required name : ',requiredAuthor)
+    const mostPub = { 
+        'author' : requiredAuthor[0], 
+        'Blogs': value 
+    }
+    console.log(mostPub)
+    return mostPub
 }
 
 const mostLikes = (blogs) => {

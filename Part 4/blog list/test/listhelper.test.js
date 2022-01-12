@@ -26,7 +26,7 @@ const multipleBlogs = [
     },
     {
         'title': 'Nas The GOAT',
-        'author': 'DJ Danny The Don',
+        'author': 'Otim Brian',
         'url': 'http://localhost/getting-nas',
         'likes': 23,
         'id': '61d44636dbf4a54bc01e034e'
@@ -132,9 +132,21 @@ describe('Favourite Blogs of', () => {
         expect(listHelper.favouriteBlog(multipleBlogsWithMoreThanOneFavourite)).toEqual(resultForMultipleBlogWwithMorethanOneFavourites)
     })
 })
-
-describe('Most Blogs',  () => {
+const mostPubAuthor = {
+    'author' : 'Otim Brian',
+    'Blogs' : 2
+}
+describe('Top Blogger',  () => {
     test('trial', () => {
-        expect(listHelper.mostBlogs(multipleBlogs)).toEqual(resultForMultipleBlog)
+        expect(listHelper.mostBlogs(multipleBlogs)).toEqual(mostPubAuthor)
+    })
+    test('empty list', () => {
+        expect(listHelper.mostBlogs([])).toEqual({ author: undefined, Blogs: 0 })
+    })
+    test('Many top bloggers', () => {
+        expect(listHelper.mostBlogs(multipleBlogsWithMoreThanOneFavourite)).toEqual({
+            'author': 'Otim Brian',
+            'Blogs' : 1
+        })
     })
 })
