@@ -28,6 +28,13 @@ test('Notes are returned as JSON', async () => {
     expect(blogs).toHaveLength(helper.initialBlogs.length)
 })
 
+test('The unique Identifier is id', async () => {
+    const blogs = await helper.blogsInDB()
+
+    for(let blog of blogs){
+        expect(blog.id).toBeDefined()
+    }
+})
 afterAll(
     () => {
         mongoose.connection.close()
