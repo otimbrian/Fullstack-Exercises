@@ -23,6 +23,9 @@ test('Notes are returned as JSON', async () => {
     await api.get('/api/blogs')
         .expect(200)
         .expect('Content-Type', /application\/json/)
+
+    const blogs = await helper.blogsInDB()
+    expect(blogs).toHaveLength(helper.initialBlogs.length)
 })
 
 afterAll(
