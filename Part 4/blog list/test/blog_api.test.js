@@ -19,7 +19,7 @@ beforeEach(
     })
 
 
-test('Notes are returned as JSON', async () => {
+test('Blogs are returned as JSON', async () => {
     await api.get('/api/blogs')
         .expect(200)
         .expect('Content-Type', /application\/json/)
@@ -35,6 +35,27 @@ test('The unique Identifier is id', async () => {
         expect(blog.id).toBeDefined()
     }
 })
+
+test('New blog is added', async () => {
+    const newBlog = {
+        'title': 'React.JS for web',
+        'author': 'Denny Jolly',
+        'url': 'http://localhost/web-frame-work',
+        'likes': 15,
+    }
+
+    await api.post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+
+    const blogs = await helper.blogsInDB()
+    expect(blogs).toHaveLength(helper.initialBlogs.length + 1)
+
+    const blogTitles = blogs.map(blog => blog.title)
+    expect(blogTitles).toContain(newBlog.title)
+})
+
 afterAll(
     () => {
         mongoose.connection.close()
