@@ -67,6 +67,27 @@ test('Likes default to 0', async () => {
     expect(savedBlog.body.likes).toBe(0)
 })
 
+test('Blogs with missing title or author cannot be created', async () => {
+    const newBlogNoTitle = {
+        'author': 'Denny Jolly',
+        'url': 'http://localhost/web-frame-work',
+        'likes': 15,
+    }
+
+    await api.post('/api/blogs').send(newBlogNoTitle).expect(400)
+
+    const newBlogNoAuthor = {
+        'title': 'React.JS for web',
+        'url': 'http://localhost/web-frame-work',
+        'likes': 15,
+    }
+
+    await api.post('/api/blogs').send(newBlogNoAuthor).expect(400)
+
+    const blogs = await helper.blogsInDB()
+    expect(blogs).toHaveLength(helper.initialBlogs.length)
+})
+
 afterAll(
     () => {
         mongoose.connection.close()
