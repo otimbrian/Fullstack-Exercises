@@ -56,6 +56,17 @@ test('New blog is added', async () => {
     expect(blogTitles).toContain(newBlog.title)
 })
 
+test('Likes default to 0', async () => {
+    const newBlog = {
+        'title': 'React.JS for web',
+        'author': 'Denny Jolly',
+        'url': 'http://localhost/web-frame-work',
+    }
+
+    const savedBlog = await api.post('/api/blogs').send(newBlog)
+    expect(savedBlog.body.likes).toBe(0)
+})
+
 afterAll(
     () => {
         mongoose.connection.close()
