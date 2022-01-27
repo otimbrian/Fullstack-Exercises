@@ -100,6 +100,29 @@ describe('Deleting a blog', () => {
     })
 })
 
+describe('Changing a blog', () => {
+    test('Should succeed when a valid id is used', async () => {
+        const update = {
+            'title': 'React.JS for web',
+            'author': 'Denny Jolly',
+            'url': 'http://localhost/web-frame-work',
+        }
+
+        const blogsAtStart = await helper.blogsInDB()
+
+
+        await  api.put(`/api/blogs/${blogsAtStart[0].id}`)
+            .send(update)
+            .expect(200)
+
+
+        const blogsAfter = await helper.blogsInDB()
+        const titles = blogsAfter.map(blog => blog.title)
+        expect(titles).toContain(update.title)
+
+    })
+})
+
 describe('General cases', () => {
 
     test('The unique Identifier is id', async () => {
