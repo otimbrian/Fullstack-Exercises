@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "React.JS for web",
-    "author": "Denny Jolly",
-    "url": "http://localhost/web-frame-work",
-    "likes":15
+    "title": "This is the world",
+    "author": "Edwin Huble",
+    "url": "http://localhost/getting-to-the-stars",
+    "likes": 50
 }
