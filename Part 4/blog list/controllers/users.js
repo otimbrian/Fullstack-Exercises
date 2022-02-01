@@ -9,7 +9,6 @@ userRouter.post('/', async (request, response) => {
     const saltRounds = 10
     const passwordHass = await bcrypt.hash(body.password, saltRounds)
 
-    console.log(body)
     if(!body.username || !body.password){
         return response.status(401).json({
             error : 'Missing password or username'
