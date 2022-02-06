@@ -1,9 +1,9 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI2MWZiMWI2MzdlMDcyNTRhMWNjYzI1NzIiLCJpYXQiOjE2NDQxMDU4ODB9.kBFgTCHJAleDkISm-mPKXiKpClW2ANRdGevuALvI7Ls
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI2MWZiMWI2MzdlMDcyNTRhMWNjYzI1NzIiLCJpYXQiOjE2NDQxMzc1Nzd9.6lSsp6C2QyKI_6GHR8lt3c5Xgxic7tmGuL0nF2Imcac
 
 {
-    "title": "The end is near",
-    "author": "Believers",
-    "url": "http://martin-fowler.com/articles/microservices"
+    "title": "Nas for rock n roll Hall of Fame",
+    "author": "Innocent Muanguzi",
+    "url": "http://rocknroll/artistes/hall-of-fame"
 }
