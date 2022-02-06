@@ -1,9 +1,11 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 blogsRouter.get('/', async (request, response, next) => {
     try{
         const blogs = await Blog.find({})
+            .populate('user', { username: 1, name: 1 })
         response.json(blogs.map(blog => blog.toJSON()))
     }catch{
         exception => next(exception)
@@ -13,9 +15,15 @@ blogsRouter.get('/', async (request, response, next) => {
 blogsRouter.post('/', async (request, response) => {
     const body = request.body
 
+    const users = await User.find({})
+    const randomNumber = Math.floor(Math.random(0, 10) * users.length)
+    const user = users[randomNumber]
+    console.log(user)
+
     const blog = new Blog({
         'title' : body.title,
         'author' : body.author,
+        'user': user.id,
         'url' : body.url,
         'likes' : body.likes
     })
