@@ -1,8 +1,9 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI2MWZiMWI2MzdlMDcyNTRhMWNjYzI1NzIiLCJpYXQiOjE2NDQxMDU4ODB9.kBFgTCHJAleDkISm-mPKXiKpClW2ANRdGevuALvI7Ls
 
 {
-    "title": "Micro services and the law of distributed services",
-    "author": "Robert Fowler",
-    "url": "http://robertfowler.com/articles/services"
+    "title": "React Js is a Javascript library",
+    "author": "Martin Fowler",
+    "url": "http://martin-fowler.com/articles/microservices"
 }
