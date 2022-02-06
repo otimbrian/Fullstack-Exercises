@@ -1,8 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
-const jwt = require('jsonwebtoken')
-
 
 // const getToken = request => {
 //     const authorization = request.get('authorization')
@@ -17,7 +15,6 @@ blogsRouter.get('/', async (request, response, next) => {
     try{
         const blogs = await Blog.find({})
             .populate('user', { username: 1, name: 1 })
-        console.log(request.token)
         response.json(blogs.map(blog => blog.toJSON()))
     }catch{
         exception => next(exception)
@@ -26,16 +23,10 @@ blogsRouter.get('/', async (request, response, next) => {
 
 blogsRouter.post('/', async (request, response) => {
     const body = request.body
+    const user = request.user
     // const token = getToken(request)
-    const decodedToken = jwt.verify(request.token, process.env.SECRET)
-
-    if(!decodedToken.id){
-        return response.status(401).json({ error : 'Missing or Invalid token' })
-    }
     // const users = await User.find({})
     // const randomNumber = Math.floor(Math.random(0, 10) * users.length)
-    console.log(decodedToken)
-    const user = await User.findById(decodedToken.id)
 
     const blog = new Blog({
         'title' : body.title,
@@ -55,20 +46,15 @@ blogsRouter.post('/', async (request, response) => {
 
 blogsRouter.delete('/:id', async (request, response) => {
     const blog = await Blog.findById(request.params.id)
-    const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
-    if(!decodedToken.id){
-        return response.status(401).json({ Error : 'Missing or Invalid token' })
-    }
-    if(blog.user.toString() === decodedToken.id.toString()){
+    if(blog.user.toString() === request.user.id.toString()){
         await Blog.findByIdAndDelete(request.params.id)
         response.status(204).end()
     }else{
         response.status(401).json({ Error : 'Do not Have permission to delete this blog' })
     }
 
-    console.log(blog.user.toString(), decodedToken.id.toString())
-
+    console.log(blog.user.toString(), request.user.id.toString())
     // // await Blog.findByIdAndDelete(request.params.id)
     // response.status(204).end()
 })

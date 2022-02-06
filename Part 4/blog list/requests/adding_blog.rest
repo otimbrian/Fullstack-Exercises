@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWQiOiI2MWZiMWI2MzdlMDcyNTRhMWNjYzI1NzIiLCJpYXQiOjE2NDQxMzc1Nzd9.6lSsp6C2QyKI_6GHR8lt3c5Xgxic7tmGuL0nF2Imcac
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik90aW1icmlhbiIsImlkIjoiNjFmZmFiN2ViYThlNGU1NTNmYThhMWExIiwiaWF0IjoxNjQ0MTQ1NTc5fQ.7P2C_r_4JSdjo2Cog45ZnyTCt6p6yZOfGYHGOl3h9oY
 
 {
     "title": "Nas for rock n roll Hall of Fame",
