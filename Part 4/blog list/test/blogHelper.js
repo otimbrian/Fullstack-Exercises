@@ -1,4 +1,5 @@
 const Blog = require('../models/blog')
+// const login = require('../controllers/login')
 
 const initialBlogs = [
     {
@@ -31,5 +32,9 @@ const blogsInDB = async () => {
     const blogs = await Blog.find({})
     return blogs.map(blog => blog.toJSON())
 }
+
+// const getToken = async () => {
+//     const token = await api.post
+// }
 
 module.exports = { initialBlogs, blogsInDB, nonExistingId }

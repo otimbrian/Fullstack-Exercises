@@ -7,7 +7,7 @@ const helper = require('./blogHelper')
 
 const api = supertest(app)
 
-
+var login = ''
 beforeEach(
     async () => {
         await Blog.deleteMany({})
@@ -16,6 +16,11 @@ beforeEach(
             let blogObject = new Blog(blog)
             await blogObject.save()
         }
+    login = await api.post('/api/login').send({
+            'username' : 'Otimbrian',
+            'password' : 'otimbrian'
+        })
+
     })
 
 describe('When there are blogs initially', () => {
@@ -41,6 +46,7 @@ describe('Adding Blogs', () => {
         }
 
         await api.post('/api/blogs')
+            .set('Authorization', `bearer ${login.body.token}`)
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -60,7 +66,9 @@ describe('Adding Blogs', () => {
             'likes': 15,
         }
 
-        await api.post('/api/blogs').send(newBlogNoTitle).expect(400)
+        await api.post('/api/blogs')
+            .set('Authorization', `bearer ${login.body.token}`)
+            .send(newBlogNoTitle).expect(400)
 
         const newBlogNoAuthor = {
             'title': 'React.JS for web',
@@ -68,7 +76,10 @@ describe('Adding Blogs', () => {
             'likes': 15,
         }
 
-        await api.post('/api/blogs').send(newBlogNoAuthor).expect(400)
+        await api.post('/api/blogs')
+            .set('Authorization', `bearer ${login.body.token}`)
+            .send(newBlogNoAuthor)
+            .expect(400)
 
         const blogs = await helper.blogsInDB()
         expect(blogs).toHaveLength(helper.initialBlogs.length)
@@ -80,6 +91,7 @@ describe('Deleting a blog', () => {
 
         await api
             .delete(`/api/blogs/${blogsAtStart[0].id}`)
+            .set('Authorization', `bearer ${login.body.token}`)
             .expect(204)
     })
 
@@ -96,6 +108,7 @@ describe('Deleting a blog', () => {
 
         await api
             .delete(`/api/blogs/${invalidId}`)
+            .set('Authorization', `bearer ${login.body.token}`)
             .expect(400)
     })
 })
@@ -140,7 +153,9 @@ describe('General cases', () => {
             'url': 'http://localhost/web-frame-work',
         }
 
-        const savedBlog = await api.post('/api/blogs').send(newBlog)
+        const savedBlog = await api.post('/api/blogs')
+            .set('Authorization', `bearer ${login.body.token}`)
+            .send(newBlog)
         expect(savedBlog.body.likes).toBe(0)
     })
 })
