@@ -108,6 +108,13 @@ describe('Deleting a blog', () => {
             .set('Authorization', `bearer ${login.body.token}`)
             .expect(204)
     })
+    test('Fails when token not given', async () => {
+        const blogsAtStart = await helper.blogsInDB()
+
+        await api
+            .delete(`/api/blogs/${blogsAtStart[0].id}`)
+            .expect(401)
+    })
 
     test('Fails when the id doses not exist', async () => {
         const nonExistingId = helper.nonExistingId()
