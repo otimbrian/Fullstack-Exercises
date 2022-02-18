@@ -16,7 +16,7 @@ beforeEach(
             let blogObject = new Blog(blog)
             await blogObject.save()
         }
-    login = await api.post('/api/login').send({
+        login = await api.post('/api/login').send({
             'username' : 'Otimbrian',
             'password' : 'otimbrian'
         })
@@ -87,10 +87,24 @@ describe('Adding Blogs', () => {
 })
 describe('Deleting a blog', () => {
     test('Succeeds with status code 204 if id is valid', async () => {
-        const blogsAtStart = await helper.blogsInDB()
+        // const blogsAtStart = await helper.blogsInDB()
+
+        const newBlog = {
+            'title': 'React.JS for web',
+            'author': 'Denny Jolly',
+            'url': 'http://localhost/web-frame-work',
+            'likes': 15,
+        }
+
+        await api.post('/api/blogs')
+            .set('Authorization', `bearer ${login.body.token}`)
+            .send(newBlog)
+
+        const blogs = await helper.blogsInDB()
+        const blog = blogs.find(blog => blog.title === 'React.JS for web' )
 
         await api
-            .delete(`/api/blogs/${blogsAtStart[0].id}`)
+            .delete(`/api/blogs/${blog.id}`)
             .set('Authorization', `bearer ${login.body.token}`)
             .expect(204)
     })
@@ -100,6 +114,7 @@ describe('Deleting a blog', () => {
 
         await api
             .delete(`/api/blogs/${nonExistingId}`)
+            .set('Authorization', `bearer ${login.body.token}`)
             .expect(400)
     })
 
