@@ -17,10 +17,23 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() =>{
+      const loggedUser = window.localStorage.getItem('loggedInUser')
+      if(loggedUser){
+          const user = JSON.parse(loggedUser)
+          setUser(user)
+      }
+
+  }, [])
+
+
   const handleLogin = async (event) => {
       event.preventDefault()
       try{
             const user = await loginServices.login({username, password})
+            window.localStorage.setItem(
+                'loggedInUser', JSON.stringify(user)
+            )
             setUser(user)
             setUsername('')
             setPassword('')
@@ -34,6 +47,12 @@ const App = () => {
   const handleUsernameChange = event => setUsername(event.target.value)
   const handlePasswordChange = event => setPassword(event.target.value)
 
+  const handleLogout = async () => {
+      console.log('logged out')
+      window.localStorage.removeItem('loggedInUser')
+      setUser(null)
+  }
+
 
   if(user === null){
     return(
@@ -46,7 +65,7 @@ const App = () => {
                 </div>
                 <div>
                     password
-                    <input type="text" name="Username" onChange={handlePasswordChange} />
+                    <input type="password" name="Password" onChange={handlePasswordChange} />
                 </div>
                 <button type="submit">login</button>
             </form>
@@ -55,8 +74,12 @@ const App = () => {
   }
   return (
     <div className='form'>
-        <h2>blogs</h2>
+
         <h3>{user.name} is logged in </h3>
+        <button onClick={handleLogout}>Logout</button>
+        <hr />
+
+        <h2>Blogs</h2>
         {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
         )}
