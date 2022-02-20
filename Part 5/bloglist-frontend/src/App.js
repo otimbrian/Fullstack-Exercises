@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import AddBlog from './components/AddBlog'
+import Login from './components/Login'
 import blogService from './services/blogs'
 import loginServices from './services/login'
 import './index.css'
+import Notification from './components/Notification'
 
 
 const App = () => {
@@ -14,6 +16,8 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [user, setUser] = useState(null)
+  const [status, setStatus] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -44,10 +48,12 @@ const App = () => {
             setUsername('')
             setPassword('')
       }catch(exeption){
-          console.log('Wrong Credential')
-          setTimeout(() => {
-              console.log('Error')
-          }, 5000)
+            setStatus('error')
+            setMessage('Invalid Username or Password Used')
+            setTimeout(() => {
+                setStatus('')
+                setMessage(null)
+        }, 5000)
       }
   }
   const handleUsernameChange = event => setUsername(event.target.value)
@@ -71,6 +77,12 @@ const App = () => {
 
       const blog = await blogService.create(newBlog)
       setBlogs(blogs.concat(blog))
+      setMessage(`Created blog ${title} by ${author}`)
+      setStatus('success')
+      setTimeout(() => {
+          setStatus('')
+          setMessage(null)
+      }, 5000)
       setTitle('')
       setAuthor('')
       setUrl('')
@@ -79,24 +91,16 @@ const App = () => {
   if(user === null){
     return(
         <div className='form'>
-            <form onSubmit={handleLogin} >
-                <h2>Login</h2>
-                <div>
-                    username
-                    <input type="text" name="Username" onChange={handleUsernameChange} />
-                </div>
-                <div>
-                    password
-                    <input type="password" name="Password" onChange={handlePasswordChange} />
-                </div>
-                <button type="submit">login</button>
-            </form>
+            <Notification message={message} status={status} />
+            <Login handleLogin={handleLogin} handleUsernameChange={handleUsernameChange} 
+                handlePasswordChange={handlePasswordChange} username={username} 
+                password={password}/>
         </div>
     )
   }
   return (
     <div className='form'>
-
+        <Notification status={status} message={message} />
         <h3>{user.name} is logged in </h3>
         <button onClick={handleLogout}>Logout</button>
         <hr />

@@ -1,8 +1,8 @@
 import React from "react"
 
 
-const AddBlog = ({handleSubmit, handleTitleChange, handleAuthorChange, handleUrlChange,
-        title, author, url}) => {
+const AddBlog = ({handleSubmit, handleTitleChange, handleAuthorChange,
+                    handleUrlChange, title, author, url}) => {
     return(
         <form onSubmit={handleSubmit}>
             <div>

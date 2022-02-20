@@ -8,3 +8,11 @@ h2 {
     background-color: aliceblue;
     text-align: center;
 }
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
