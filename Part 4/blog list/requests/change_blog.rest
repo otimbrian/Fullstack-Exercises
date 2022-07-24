@@ -1,0 +1,9 @@
+PUT http://localhost:3003/api/blogs/61f1e96871344a3c98b3d3d9
+Content-Type: application/json
+
+{
+    "title": "React.JS for web",
+    "author": "Hello World",
+    "url": "http://localhost/web-frame-work",
+    "likes": 24
+}

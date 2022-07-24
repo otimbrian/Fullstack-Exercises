@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik90aW1icmlhbiIsImlkIjoiNjFmZmFiN2ViYThlNGU1NTNmYThhMWExIiwiaWF0IjoxNjQ0MTQ1NTc5fQ.7P2C_r_4JSdjo2Cog45ZnyTCt6p6yZOfGYHGOl3h9oY
+
+{
+    "title": "Nas for rock n roll Hall of Fame",
+    "author": "Innocent Muanguzi",
+    "url": "http://rocknroll/artistes/hall-of-fame"
+}
