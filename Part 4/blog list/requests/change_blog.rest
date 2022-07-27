@@ -1,9 +1,10 @@
-PUT http://localhost:3003/api/blogs/61f1e96871344a3c98b3d3d9
+PUT http://localhost:3003/api/blogs/62dda79b2094178492e6e089
 Content-Type: application/json
 
 {
-    "title": "React.JS for web",
-    "author": "Hello World",
-    "url": "http://localhost/web-frame-work",
-    "likes": 24
+    "title": "Don’t Sacrifice Civil Rights to Assuage Fears about China",
+    "author": "Gregory Kulacki",
+    "url": "https://allthingsnuclear.org/gkulacki/dont-sacrifice-civil-rights-to-a...",
+    "likes": 3,
+    "user": "62dda6902094178492e6e07f"
 }

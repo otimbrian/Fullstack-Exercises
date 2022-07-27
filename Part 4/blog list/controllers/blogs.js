@@ -25,9 +25,6 @@ blogsRouter.get('/', async (request, response, next) => {
 blogsRouter.post('/', userExtractor, async (request, response) => {
     const body = request.body
     const user = request.user
-    // const token = getToken(request)
-    // const users = await User.find({})
-    // const randomNumber = Math.floor(Math.random(0, 10) * users.length)
 
     const blog = new Blog({
         'title' : body.title,
@@ -40,24 +37,20 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
     const savedBlog = await blog.save()
     user.blogs = user.blogs.concat(savedBlog._id)
 
-    // await user.save()
     await User.findByIdAndUpdate(user.id, user)
     response.status(201).json(savedBlog)
 })
 
 blogsRouter.delete('/:id', userExtractor, async (request, response) => {
+    
     const blog = await Blog.findById(request.params.id)
 
     if(blog.user.toString() === request.user.id.toString()){
         await Blog.findByIdAndDelete(request.params.id)
         response.status(204).end()
     }else{
-        response.status(401).json({ Error : 'Do not Have permission to delete this blog' })
+        response.status(401).json({ "Error" : 'No permission to delete' }).end()
     }
-
-    console.log(blog.user.toString(), request.user.id.toString())
-    // // await Blog.findByIdAndDelete(request.params.id)
-    // response.status(204).end()
 })
 
 blogsRouter.put('/:id', async (request, response) => {
@@ -67,11 +60,14 @@ blogsRouter.put('/:id', async (request, response) => {
         'title' : body.title,
         'author' : body.author,
         'url' : body.url,
-        'likes' : body.likes
+        'likes' : body.likes,
+        'user': body.user.id
     }
 
     const upDatedBlogs = await Blog.findByIdAndUpdate(request.params.id, blog, { new : true })
     response.json(upDatedBlogs.toJSON())
 })
+
+
 
 module.exports = blogsRouter

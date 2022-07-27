@@ -16,3 +16,7 @@ h2 {
 .success {
     color: green;
 }
+
+#deleteButton {
+    color: red;
+}

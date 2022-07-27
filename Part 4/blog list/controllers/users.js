@@ -35,4 +35,11 @@ userRouter.get('/', async (request, response) => {
 
     response.json(users.map(user  => user.toJSON()))
 })
+
+userRouter.get('/:id', async (request, response) => {
+    const name = request.params.id
+
+    const user = await User.findOne({username : name})
+    response.json(user)
+})
 module.exports = userRouter
